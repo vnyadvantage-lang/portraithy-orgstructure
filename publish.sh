@@ -8,13 +8,12 @@ export PATH="/opt/homebrew/bin:$PATH"
 
 SRC="$HOME/Downloads/org-structure/orgstructure.html"
 BUILD="$HOME/Downloads/org-structure/build-protected.js"
+USERS="$HOME/Downloads/org-structure/users.json"
 DIR="$HOME/Downloads/portraithy-orgstructure"
 REPO="vnyadvantage-lang/portraithy-orgstructure"
-LOGIN="COO"
-PASSWORD="Portraithy2026"
 
-echo "1/5 Пересборка зашифрованной версии из актуального файла…"
-node "$BUILD" "$SRC" "$LOGIN" "$PASSWORD" > "$DIR/index.html"
+echo "1/5 Пересборка зашифрованной версии (доступы — из users.json)…"
+node "$BUILD" "$SRC" "$USERS" > "$DIR/index.html"
 printf 'User-agent: *\nDisallow: /\n' > "$DIR/robots.txt"
 
 cd "$DIR"
@@ -43,4 +42,4 @@ gh api -X POST "repos/$REPO/pages" -f 'source[branch]=main' -f 'source[path]=/' 
 
 echo "5/5 Готово!"
 echo "Ссылка (заработает через 1-2 минуты): https://vnyadvantage-lang.github.io/portraithy-orgstructure/"
-echo "Вход:  логин $LOGIN  ·  пароль $PASSWORD"
+echo "Доступы — из users.json (логин = e-mail, пароль соответствующий)."
